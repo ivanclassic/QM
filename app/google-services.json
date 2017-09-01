@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "751182625945",
+    "firebase_url": "https://easymessenger-287e8.firebaseio.com",
+    "project_id": "easymessenger-287e8",
+    "storage_bucket": "easymessenger-287e8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:751182625945:android:050f7a506be642b9",
+        "android_client_info": {
+          "package_name": "com.ivan.messenger"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "751182625945-19rm615cs9jes41poj1dsks4646dlfdm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ivan.messenger",
+            "certificate_hash": "ef584c66aa119dff2ebe0c46b736c1db38a89fe2"
+          }
+        },
+        {
+          "client_id": "751182625945-23sfatjo97s4ns8sgm2k9kfh50nairml.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtTf_6L020ooEAjjREWW6A8E-4s-iYfNY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "751182625945-23sfatjo97s4ns8sgm2k9kfh50nairml.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
