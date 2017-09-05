@@ -41,16 +41,16 @@
             </intent-filter>
         </service>
 
-        <activity
-            android:name=".ui.BaseActivity"
-            android:label="@string/title_activity_base"
-            android:theme="@style/AppTheme.NoActionBar" />
-
         <provider
             android:name=".sp.provider.ConfigProvider"
             android:authorities="com.ivan.messenger.sp.provider"
             android:exported="false"
             android:process=":service" />
+
+        <activity android:name=".ui.SignupActivity"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTask"/>
+
     </application>
 
 </manifest>
