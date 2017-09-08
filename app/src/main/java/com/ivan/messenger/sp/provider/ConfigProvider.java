@@ -168,7 +168,8 @@ public class ConfigProvider extends ContentProvider {
         if (result == null)
             return defValue;
 
-        return String.valueOf(result.toString().substring(LENGTH_CONTENT_URI));
+        String res = String.valueOf(result.toString().substring(LENGTH_CONTENT_URI));
+        return TextUtils.isEmpty(res) ? defValue : res;
     }
 
     public static void removeKey(String key) {
@@ -192,24 +193,30 @@ public class ConfigProvider extends ContentProvider {
     @Override
     public Uri insert(@NonNull Uri uri, ContentValues values) {
         RuntimeCheck.checkServiceProcess();
-        String res = "";
         int nType = values.getAsInteger(EXTRA_TYPE);
+        String res = null;
         if (nType == TYPE_BOOLEAN) {
-            res += ServiceConfigManager.getInstance().getBooleanValue(
+            boolean b = ServiceConfigManager.getInstance().getBooleanValue(
                     values.getAsString(EXTRA_KEY),
                     values.getAsBoolean(EXTRA_VALUE));
+            res = String.valueOf(b);
         } else if (nType == TYPE_STRING) {
-            res += ServiceConfigManager.getInstance().getStringValue(
+            res = ServiceConfigManager.getInstance().getStringValue(
                     values.getAsString(EXTRA_KEY),
                     values.getAsString(EXTRA_VALUE));
+            if (res == null) {
+                res = "";
+            }
         } else if (nType == TYPE_INT) {
-            res += ServiceConfigManager.getInstance().getIntValue(
+            int i = ServiceConfigManager.getInstance().getIntValue(
                     values.getAsString(EXTRA_KEY),
                     values.getAsInteger(EXTRA_VALUE));
+            res = String.valueOf(i);
         } else if (nType == TYPE_LONG) {
-            res += ServiceConfigManager.getInstance().getLongValue(
+            long l = ServiceConfigManager.getInstance().getLongValue(
                     values.getAsString(EXTRA_KEY),
                     values.getAsLong(EXTRA_VALUE));
+            res = String.valueOf(l);
         }
 
         return Uri.parse(CONFIG_CONTENT_URI.toString() + "/" + res);

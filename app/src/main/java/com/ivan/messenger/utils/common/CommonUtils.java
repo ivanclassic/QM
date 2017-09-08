@@ -26,7 +26,7 @@ public class CommonUtils {
         } else {
             Context context = IMessengerApplication.getInstance().getApplicationContext();
             TelephonyManager tMgr = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-            if (PermissionUtils.hasPermission(Manifest.permission.READ_PHONE_STATE)) {
+            if (!PermissionUtils.hasPermission(Manifest.permission.READ_PHONE_STATE)) {
                 throw new RuntimeException("try to get line1 phone number without permission granted");
             }
             if (tMgr != null) {
@@ -52,5 +52,9 @@ public class CommonUtils {
             ILog.e(TAG, "打开Intent失败:", e);
         }
         return bResult;
+    }
+
+    public static boolean isEmailValid(CharSequence email) {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 }
