@@ -12,7 +12,7 @@ import com.ivan.messenger.utils.common.CommonUtils;
  * Created by zhaoyifan on 17-9-8.
  */
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseFragmentActivity {
     private static final String TAG = "MainActivity";
 
     public static void start(Context context) {
@@ -24,5 +24,10 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+    }
+
+    @Override
+    protected int getFragmentContainerId() {
+        return 0;
     }
 }

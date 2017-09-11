@@ -1,14 +1,14 @@
 package com.ivan.messenger.ui;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -18,6 +18,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.ivan.messenger.R;
+import com.ivan.messenger.presenter.AuthPresenter;
 import com.ivan.messenger.utils.common.CommonUtils;
 
 /**
@@ -27,13 +28,16 @@ import com.ivan.messenger.utils.common.CommonUtils;
  * Created by zhaoyifan on 17-9-1.
  */
 
-public class SignupActivity extends BaseActivity implements View.OnClickListener {
-    private static final String TAG = "SignupActivity";
+public class SignupFragment extends AuthBaseFragment implements View.OnClickListener {
+    private static final String TAG = "SignupFragment";
+
+    public static final String FRAGMENT_ARGUMENT_PRESENTER = "fragment_argument_presenter";
 
     private EditText mNameEditor;
     private EditText mPasswordEditor;
     private EditText mConfirmEditor;
     private Button mSignupBtn;
+    private AuthPresenter mAuthPresenter;
 
     private TextWatcher mNameWatcher = new TextWatcher() {
         @Override
@@ -52,23 +56,19 @@ public class SignupActivity extends BaseActivity implements View.OnClickListener
         }
     };
 
-    public static void start(Context context) {
-        Intent intent = new Intent(context, SignupActivity.class);
-        CommonUtils.safeStartIntent(context, intent);
-    }
-
+    @Nullable
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_signup);
-        mNameEditor = findViewById(R.id.field_username);
-        mPasswordEditor = findViewById(R.id.field_password);
-        mConfirmEditor = findViewById(R.id.field_confirm_password);
-        mSignupBtn = findViewById(R.id.btn_confirm);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_signup, container, false);
+        mNameEditor = rootView.findViewById(R.id.field_username);
+        mPasswordEditor = rootView.findViewById(R.id.field_password);
+        mConfirmEditor = rootView.findViewById(R.id.field_confirm_password);
+        mSignupBtn = rootView.findViewById(R.id.btn_confirm);
         mSignupBtn.setOnClickListener(this);
         mNameEditor.addTextChangedListener(mNameWatcher);
+        mAuthPresenter = (AuthPresenter) getArguments().getSerializable(FRAGMENT_ARGUMENT_PRESENTER);
+        return rootView;
     }
-
 
     @Override
     public void onClick(View view) {
@@ -89,15 +89,6 @@ public class SignupActivity extends BaseActivity implements View.OnClickListener
         if (!TextUtils.equals(password, confirmPw)) {
             return;
         }
-        FirebaseAuth.getInstance()
-                .createUserWithEmailAndPassword(userName, password)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(SignupActivity.this, "OK! Success", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+        mAuthPresenter.createUser(userName, password);
     }
 }

@@ -7,6 +7,8 @@ import android.os.Environment;
 import java.io.File;
 
 public class Env {
+    public static final boolean DEBUG = BuildConfig.DEBUG;
+
     public static String getPkgName(Context context) {
         return context.getPackageName();
     }
