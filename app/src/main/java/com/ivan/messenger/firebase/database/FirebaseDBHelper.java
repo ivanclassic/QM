@@ -18,7 +18,7 @@ public abstract class FirebaseDBHelper {
 
     public abstract DatabaseReference getTable();
 
-    public abstract void saveValue(IDataInterface data);
+    public abstract void saveValue();
 
 //    public static void post(String table, Map<String, Object> postValues) {
 //        String key = database.child(table).push().getKey();

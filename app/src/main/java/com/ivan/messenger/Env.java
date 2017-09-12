@@ -72,6 +72,6 @@ public class Env {
         return apkCacheDir;
     }
 
-    public static final int VERSION_CODE = 45040207;
-    public static final String VERSION_NAME = "4.5.4";
+    public static final int VERSION_CODE = 1;
+    public static final String VERSION_NAME = "1.0.0";
 }

@@ -67,10 +67,10 @@ public class AuthPresenter extends BasePresenter implements Serializable {
     private void onAuthSuccess(FirebaseUser user) {
         String username = usernameFromEmail(user.getEmail());
         User me = new User();
+        me.uid = user.getUid();
         me.nickName = username;
-        me.userId = user.getEmail();
-        UserFirebaseDBHelper ufh = new UserFirebaseDBHelper();
-        ufh.saveValue(me);
+        me.userName = user.getEmail();
+        me.save();
     }
 
     private String usernameFromEmail(String email) {
