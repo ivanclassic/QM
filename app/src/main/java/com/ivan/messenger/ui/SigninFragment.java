@@ -28,7 +28,6 @@ public class SigninFragment extends AuthBaseFragment implements View.OnClickList
     private EditText mNameEditor;
     private EditText mPasswordEditor;
     private Button mSigninBtn;
-    private AuthPresenter mAuthPresenter;
 
     private TextWatcher mNameWatcher = new TextWatcher() {
         @Override
@@ -50,13 +49,13 @@ public class SigninFragment extends AuthBaseFragment implements View.OnClickList
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        super.onCreateView(inflater, container, savedInstanceState);
         View rootView = inflater.inflate(R.layout.fragment_signin, container, false);
         mNameEditor = rootView.findViewById(R.id.field_username);
         mPasswordEditor = rootView.findViewById(R.id.field_password);
         mSigninBtn = rootView.findViewById(R.id.btn_confirm);
         mSigninBtn.setOnClickListener(this);
         mNameEditor.addTextChangedListener(mNameWatcher);
-        mAuthPresenter = (AuthPresenter) getArguments().getSerializable(FRAGMENT_ARGUMENT_PRESENTER);
         return rootView;
     }
 

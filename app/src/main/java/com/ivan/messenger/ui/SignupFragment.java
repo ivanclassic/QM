@@ -31,13 +31,10 @@ import com.ivan.messenger.utils.common.CommonUtils;
 public class SignupFragment extends AuthBaseFragment implements View.OnClickListener {
     private static final String TAG = "SignupFragment";
 
-    public static final String FRAGMENT_ARGUMENT_PRESENTER = "fragment_argument_presenter";
-
     private EditText mNameEditor;
     private EditText mPasswordEditor;
     private EditText mConfirmEditor;
     private Button mSignupBtn;
-    private AuthPresenter mAuthPresenter;
 
     private TextWatcher mNameWatcher = new TextWatcher() {
         @Override
@@ -59,6 +56,7 @@ public class SignupFragment extends AuthBaseFragment implements View.OnClickList
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        super.onCreateView(inflater, container, savedInstanceState);
         View rootView = inflater.inflate(R.layout.fragment_signup, container, false);
         mNameEditor = rootView.findViewById(R.id.field_username);
         mPasswordEditor = rootView.findViewById(R.id.field_password);
@@ -66,7 +64,6 @@ public class SignupFragment extends AuthBaseFragment implements View.OnClickList
         mSignupBtn = rootView.findViewById(R.id.btn_confirm);
         mSignupBtn.setOnClickListener(this);
         mNameEditor.addTextChangedListener(mNameWatcher);
-        mAuthPresenter = (AuthPresenter) getArguments().getSerializable(FRAGMENT_ARGUMENT_PRESENTER);
         return rootView;
     }
 

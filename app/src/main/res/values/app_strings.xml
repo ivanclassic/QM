@@ -4,4 +4,5 @@
     <string name="text_hint_pw">Password</string>
     <string name="text_hint_confirm_pw">Confirm password</string>
     <string name="text_signup">Sign up</string>
+    <string name="text_signin">Sign in</string>
 </resources>

@@ -21,6 +21,7 @@ import java.io.Serializable;
 
 public class AuthPresenter extends BasePresenter implements Serializable {
     private static final String TAG = "AuthPresenter";
+    private static boolean sProcessExist = false;
 
     private FirebaseAuth mAuth;
     private IView mView;
@@ -30,24 +31,59 @@ public class AuthPresenter extends BasePresenter implements Serializable {
         mView = view;
     }
 
+    public boolean isAuthed() {
+//        return true;
+        return mAuth.getCurrentUser() != null;
+    }
+
     public void onCreate() {
-        ILog.d(TAG, "AuthPresenter onCreate");
-        if (mAuth.getCurrentUser() != null) {
+        ILog.d(TAG, "开始");
+        if (needWelcomeShow()) {
+            sProcessExist = true;
+            doWelcomeProgress();
+        } else {
+            doMainProgress();
+        }
+    }
+
+    private boolean needWelcomeShow() {
+        // TODO: 更新逻辑，云控控制每天的展示次数
+        // 展示条件（优先级顺序）：
+        // 1. 没有授权
+        // 2. 进程没有加载
+        // 3. 其他 （云控）
+        return !isAuthed() || !sProcessExist;
+    }
+
+    private void doWelcomeProgress() {
+        ILog.d(TAG, "启动欢迎流程");
+        mView.onWelcome();
+    }
+
+    private void doMainProgress() {
+        ILog.d(TAG, "启动主流程");
+        if (isAuthed()) {
             // 已经授权，跳转住界面
             ILog.d(TAG, "AuthPresenter authed");
             mView.onAuth();
         } else {
-            String userName = KUserConfigManager.getInstance().getSignedName();
-            if (TextUtils.isEmpty(userName)) {
-                // 从未授权过
-                ILog.d(TAG, "AuthPresenter never authed");
-                mView.onNotAuth();
-            } else {
-                // 需要重新授权
-                ILog.d(TAG, "AuthPresenter need re-login");
-                mView.onReAuth(userName);
-            }
+            ILog.d(TAG, "AuthPresenter not authed");
+            mView.onNotAuth();
+//            String userName = KUserConfigManager.getInstance().getSignedName();
+//            if (TextUtils.isEmpty(userName)) {
+//                // 从未授权过
+//                ILog.d(TAG, "AuthPresenter never authed");
+//                mView.onNotAuth();
+//            } else {
+//                // 需要重新授权
+//                ILog.d(TAG, "AuthPresenter need re-login");
+//                mView.onReAuth(userName);
+//            }
         }
+    }
+
+    public void onWelcomeComplete() {
+        doMainProgress();
     }
 
     public void createUser(String userName, String password) {
@@ -94,6 +130,7 @@ public class AuthPresenter extends BasePresenter implements Serializable {
     }
 
     public static interface IView {
+        public void onWelcome();
         public void onAuth();
         public void onNotAuth();
         public void onReAuth(String userName);

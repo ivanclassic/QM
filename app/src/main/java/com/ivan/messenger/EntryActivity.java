@@ -10,6 +10,7 @@ import com.ivan.messenger.ui.BaseFragmentActivity;
 import com.ivan.messenger.ui.MainActivity;
 import com.ivan.messenger.ui.SigninFragment;
 import com.ivan.messenger.ui.SignupFragment;
+import com.ivan.messenger.ui.WelcomeFragment;
 import com.ivan.messenger.utils.ILog;
 
 public class EntryActivity extends BaseFragmentActivity
@@ -19,6 +20,7 @@ public class EntryActivity extends BaseFragmentActivity
     private AuthPresenter mAuthPresenter;
     private Fragment mSignupFragment;
     private Fragment mSigninFragment;
+    private WelcomeFragment mWelcomeFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,13 +36,21 @@ public class EntryActivity extends BaseFragmentActivity
     private void initAuthFragment(Bundle bundle) {
         mSignupFragment = new SignupFragment();
         mSigninFragment = new SigninFragment();
+        mWelcomeFragment = new WelcomeFragment();
         mSignupFragment.setArguments(bundle);
         mSigninFragment.setArguments(bundle);
+        mWelcomeFragment.setArguments(bundle);
     }
 
     @Override
     protected int getFragmentContainerId() {
         return R.id.container;
+    }
+
+    @Override
+    public void onWelcome() {
+        ILog.d(TAG, "欢迎欢迎，请看广告");
+        addFragment(mWelcomeFragment, false);
     }
 
     @Override
@@ -58,12 +68,13 @@ public class EntryActivity extends BaseFragmentActivity
     @Override
     public void onNotAuth() {
         ILog.d(TAG, "授权未成功");
-        addFragment(mSignupFragment, false);
+        mWelcomeFragment.showSignPanel();
+//        replaceFragment(mSignupFragment);
     }
 
     @Override
     public void onReAuth(String userName) {
         ILog.d(TAG, "重新授权");
-        addFragment(mSigninFragment, false);
+//        replaceFragment(mSigninFragment);
     }
 }

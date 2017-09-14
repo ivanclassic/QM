@@ -26,5 +26,20 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
         }
     }
 
+    protected void replaceFragment(Fragment fragment) {
+        if (isFinishing() || isDestroyed()) {
+            return;
+        }
+        try {
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction()
+                    .replace(getFragmentContainerId(), fragment, fragment.getClass().getName());
+            transaction.commitAllowingStateLoss();
+        } catch (Throwable e) {
+            if (Env.DEBUG) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
     protected abstract int getFragmentContainerId();
 }
