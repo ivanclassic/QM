@@ -48,8 +48,11 @@ public class EntryActivity extends BaseFragmentActivity
     }
 
     @Override
-    public void onWelcome() {
+    public void onWelcome(boolean countDown) {
         ILog.d(TAG, "欢迎欢迎，请看广告");
+        Bundle bundle = mWelcomeFragment.getArguments();
+        bundle.putBoolean(WelcomeFragment.EXTRA_KEY_COUNTDOWN, countDown);
+        mWelcomeFragment.setArguments(bundle);
         addFragment(mWelcomeFragment, false);
     }
 
@@ -73,8 +76,14 @@ public class EntryActivity extends BaseFragmentActivity
     }
 
     @Override
-    public void onReAuth(String userName) {
+    public void onStartSignup() {
+        ILog.d(TAG, "去授权");
+        replaceFragment(mSignupFragment);
+    }
+
+    @Override
+    public void onStartSignin() {
         ILog.d(TAG, "重新授权");
-//        replaceFragment(mSigninFragment);
+        replaceFragment(mSigninFragment);
     }
 }

@@ -39,8 +39,8 @@ public class AuthPresenter extends BasePresenter implements Serializable {
     public void onCreate() {
         ILog.d(TAG, "开始");
         if (needWelcomeShow()) {
-            sProcessExist = true;
             doWelcomeProgress();
+            sProcessExist = true;
         } else {
             doMainProgress();
         }
@@ -57,7 +57,7 @@ public class AuthPresenter extends BasePresenter implements Serializable {
 
     private void doWelcomeProgress() {
         ILog.d(TAG, "启动欢迎流程");
-        mView.onWelcome();
+        mView.onWelcome(isAuthed() || !sProcessExist);
     }
 
     private void doMainProgress() {
@@ -69,21 +69,19 @@ public class AuthPresenter extends BasePresenter implements Serializable {
         } else {
             ILog.d(TAG, "AuthPresenter not authed");
             mView.onNotAuth();
-//            String userName = KUserConfigManager.getInstance().getSignedName();
-//            if (TextUtils.isEmpty(userName)) {
-//                // 从未授权过
-//                ILog.d(TAG, "AuthPresenter never authed");
-//                mView.onNotAuth();
-//            } else {
-//                // 需要重新授权
-//                ILog.d(TAG, "AuthPresenter need re-login");
-//                mView.onReAuth(userName);
-//            }
         }
     }
 
     public void onWelcomeComplete() {
         doMainProgress();
+    }
+
+    public void startSignup() {
+        mView.onStartSignup();
+    }
+
+    public void startSignin() {
+        mView.onStartSignin();
     }
 
     public void createUser(String userName, String password) {
@@ -130,9 +128,10 @@ public class AuthPresenter extends BasePresenter implements Serializable {
     }
 
     public static interface IView {
-        public void onWelcome();
+        public void onWelcome(boolean countDown);
         public void onAuth();
         public void onNotAuth();
-        public void onReAuth(String userName);
+        public void onStartSignup();
+        public void onStartSignin();
     }
 }

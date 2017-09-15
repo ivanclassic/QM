@@ -21,6 +21,8 @@ import java.lang.ref.WeakReference;
 public class WelcomeFragment extends BaseFragment implements View.OnClickListener {
     private static final String TAG = "SignupFragment";
 
+    public static final String EXTRA_KEY_COUNTDOWN = "extra_key_countdown";
+
     private View mSignPanel;
     private View mSignupBtn;
     private View mSigninBtn;
@@ -33,19 +35,31 @@ public class WelcomeFragment extends BaseFragment implements View.OnClickListene
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
+        boolean countDown = getArguments().getBoolean(EXTRA_KEY_COUNTDOWN, true);
         View rootView = inflater.inflate(R.layout.fragment_welcome, container, false);
         mSignPanel = rootView.findViewById(R.id.sign_panel);
         mSignupBtn = rootView.findViewById(R.id.btn_sign_up);
         mSigninBtn = rootView.findViewById(R.id.btn_sign_in);
         mSignupBtn.setOnClickListener(this);
         mSigninBtn.setOnClickListener(this);
-        mSignPanel.post(new Runnable() {
-            @Override
-            public void run() {
-                mSignPanelHeight = mSignPanel.getHeight();
-                startWelcomeAnimation();
-            }
-        });
+        if (countDown) {
+            mSignPanel.post(new Runnable() {
+                @Override
+                public void run() {
+                    mSignPanelHeight = mSignPanel.getHeight();
+                    startWelcomeAnimation();
+                }
+            });
+        } else {
+            mSignPanel.post(new Runnable() {
+                @Override
+                public void run() {
+                    mSignPanelHeight = mSignPanel.getHeight();
+                    hideSignPanel();
+                    showSignPanel();
+                }
+            });
+        }
         return rootView;
     }
 
@@ -60,9 +74,11 @@ public class WelcomeFragment extends BaseFragment implements View.OnClickListene
 
     private void hideSignPanel() {
         mSignPanel.setTranslationY(mSignPanelHeight);
+        mSignPanel.setVisibility(View.GONE);
     }
 
     public void showSignPanel() {
+        mSignPanel.setVisibility(View.VISIBLE);
         ObjectAnimator animator = ObjectAnimator.ofFloat(mSignPanel, "translationY", mSignPanelHeight, 0);
         animator.setInterpolator(new AccelerateDecelerateInterpolator());
         animator.setDuration(300);
@@ -82,8 +98,10 @@ public class WelcomeFragment extends BaseFragment implements View.OnClickListene
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_sign_in:
+                mAuthPresenter.startSignin();
                 break;
             case R.id.btn_sign_up:
+                mAuthPresenter.startSignup();
                 break;
         }
     }
