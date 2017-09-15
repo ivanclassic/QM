@@ -5,8 +5,10 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 
 import com.ivan.messenger.Env;
+import com.ivan.messenger.utils.ILog;
 
 public abstract class BaseFragmentActivity extends FragmentActivity {
+    private static final String TAG = "BaseFragmentActivity";
 
     protected void addFragment(Fragment fragment, boolean addToBackStack) {
         if (isFinishing() || isDestroyed()) {
@@ -38,6 +40,19 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
             if (Env.DEBUG) {
                 throw new RuntimeException(e);
             }
+        }
+    }
+
+    protected void removeFragment(boolean immediate) {
+        if (getSupportFragmentManager().getBackStackEntryCount() >= 1) {
+            if (immediate) {
+                getSupportFragmentManager().popBackStackImmediate();
+            } else {
+                getSupportFragmentManager().popBackStack();
+            }
+        } else {
+            ILog.d(TAG, "all fragment removed, finish activity");
+            finish();
         }
     }
 

@@ -83,12 +83,12 @@ public class EntryActivity extends BaseFragmentActivity
     @Override
     public void onStartSignup() {
         ILog.d(TAG, "去授权");
-        replaceFragment(mSignupFragment);
+        addFragment(mSignupFragment, true);
     }
 
     @Override
     public void onStartSignin() {
         ILog.d(TAG, "重新授权");
-        replaceFragment(mSigninFragment);
+        addFragment(mSigninFragment, true);
     }
 }
