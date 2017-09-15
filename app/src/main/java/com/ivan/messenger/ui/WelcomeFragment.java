@@ -1,7 +1,6 @@
 package com.ivan.messenger.ui;
 
 import android.animation.ObjectAnimator;
-import android.animation.PropertyValuesHolder;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;

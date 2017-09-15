@@ -1,15 +1,11 @@
 package com.ivan.messenger.utils.common;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
-import android.text.TextUtils;
 
 import com.ivan.messenger.IMessengerApplication;
-import com.ivan.messenger.utils.ILog;
 
 import java.util.ArrayList;
 import java.util.List;

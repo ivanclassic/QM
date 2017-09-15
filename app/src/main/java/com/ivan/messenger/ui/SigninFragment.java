@@ -12,7 +12,6 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.ivan.messenger.R;
-import com.ivan.messenger.presenter.AuthPresenter;
 import com.ivan.messenger.utils.common.CommonUtils;
 
 /**

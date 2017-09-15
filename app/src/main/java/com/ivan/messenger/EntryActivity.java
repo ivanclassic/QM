@@ -33,6 +33,12 @@ public class EntryActivity extends BaseFragmentActivity
         mAuthPresenter.onCreate();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mAuthPresenter = null;
+    }
+
     private void initAuthFragment(Bundle bundle) {
         mSignupFragment = new SignupFragment();
         mSigninFragment = new SigninFragment();
@@ -72,7 +78,6 @@ public class EntryActivity extends BaseFragmentActivity
     public void onNotAuth() {
         ILog.d(TAG, "授权未成功");
         mWelcomeFragment.showSignPanel();
-//        replaceFragment(mSignupFragment);
     }
 
     @Override

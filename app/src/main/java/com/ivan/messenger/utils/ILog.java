@@ -2,7 +2,6 @@ package com.ivan.messenger.utils;
 
 import android.util.Log;
 
-import com.ivan.messenger.BuildConfig;
 import com.ivan.messenger.Env;
 
 /**

@@ -1,7 +1,5 @@
 package com.ivan.messenger.firebase.model;
 
-import com.google.firebase.database.Query;
-
 import java.util.Map;
 
 /**

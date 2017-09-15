@@ -2,11 +2,6 @@ package com.ivan.messenger.firebase.database;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.ivan.messenger.firebase.model.IDataInterface;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by zhaoyifan on 17-7-28.
