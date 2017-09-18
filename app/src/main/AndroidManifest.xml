@@ -42,14 +42,11 @@
         </service>
 
         <provider
-            android:name=".sp.provider.ConfigProvider"
-            android:authorities="com.ivan.messenger.sp.provider"
+            android:name=".lib.sp.provider.ConfigProvider"
+            android:authorities="com.ivan.messenger.lib.sp.provider"
             android:exported="false"
             android:process=":service" />
 
-        <activity android:name=".ui.SignupFragment"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTask"/>
         <activity android:name=".ui.MainActivity"
             android:screenOrientation="portrait"
             android:launchMode="singleTask" />

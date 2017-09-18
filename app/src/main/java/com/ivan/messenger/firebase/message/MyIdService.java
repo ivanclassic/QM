@@ -2,7 +2,7 @@ package com.ivan.messenger.firebase.message;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
-import com.ivan.messenger.utils.ILog;
+import com.ivan.messenger.lib.utils.ILog;
 
 /**
  * Created by zhaoyifan on 17-6-13.

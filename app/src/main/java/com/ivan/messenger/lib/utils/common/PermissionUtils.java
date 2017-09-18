@@ -1,4 +1,4 @@
-package com.ivan.messenger.utils.common;
+package com.ivan.messenger.lib.utils.common;
 
 import android.app.Activity;
 import android.content.pm.PackageManager;

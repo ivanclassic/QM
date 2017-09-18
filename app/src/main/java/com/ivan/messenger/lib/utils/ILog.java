@@ -1,4 +1,4 @@
-package com.ivan.messenger.utils;
+package com.ivan.messenger.lib.utils;
 
 import android.util.Log;
 

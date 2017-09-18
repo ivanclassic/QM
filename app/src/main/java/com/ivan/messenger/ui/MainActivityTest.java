@@ -24,23 +24,23 @@ public class MainActivityTest extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        findViewById(R.id.send_btn).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                FirebaseMessaging fm = FirebaseMessaging.getInstance();
-//                fm.send(new RemoteMessage.Builder("838511304531@gcm.googleapis.com")
-//                        .setMessageId(Long.toString(System.currentTimeMillis()))
-//                        .addData("my_message", "Hello World")
-//                        .addData("my_action","SAY_HELLO")
-//                        .build());
-                new Thread() {
-                    @Override
-                    public void run() {
-                        postMessage();
-                    }
-                }.start();
-            }
-        });
+//        findViewById(R.id.send_btn).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+////                FirebaseMessaging fm = FirebaseMessaging.getInstance();
+////                fm.send(new RemoteMessage.Builder("838511304531@gcm.googleapis.com")
+////                        .setMessageId(Long.toString(System.currentTimeMillis()))
+////                        .addData("my_message", "Hello World")
+////                        .addData("my_action","SAY_HELLO")
+////                        .build());
+//                new Thread() {
+//                    @Override
+//                    public void run() {
+//                        postMessage();
+//                    }
+//                }.start();
+//            }
+//        });
     }
 
     /**

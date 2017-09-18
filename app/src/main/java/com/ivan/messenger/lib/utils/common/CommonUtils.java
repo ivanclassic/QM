@@ -1,4 +1,4 @@
-package com.ivan.messenger.utils.common;
+package com.ivan.messenger.lib.utils.common;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -8,8 +8,8 @@ import android.content.Intent;
 import android.telephony.TelephonyManager;
 
 import com.ivan.messenger.IMessengerApplication;
-import com.ivan.messenger.sp.KUserConfigManager;
-import com.ivan.messenger.utils.ILog;
+import com.ivan.messenger.lib.sp.KUserConfigManager;
+import com.ivan.messenger.lib.utils.ILog;
 
 /**
  * Created by zhaoyifan on 17-8-22.

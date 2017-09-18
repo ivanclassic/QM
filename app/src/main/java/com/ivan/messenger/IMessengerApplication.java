@@ -3,7 +3,7 @@ package com.ivan.messenger;
 import android.app.Application;
 import android.content.res.Configuration;
 
-import com.ivan.messenger.utils.ProcessUtil;
+import com.ivan.messenger.lib.utils.ProcessUtil;
 
 import java.io.File;
 

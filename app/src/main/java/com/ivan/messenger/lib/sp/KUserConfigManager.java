@@ -1,4 +1,4 @@
-package com.ivan.messenger.sp;
+package com.ivan.messenger.lib.sp;
 
 /**
  * Created by zhaoyifan on 17-8-22.

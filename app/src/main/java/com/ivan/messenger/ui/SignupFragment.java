@@ -14,7 +14,7 @@ import android.widget.EditText;
 
 import com.ivan.messenger.EntryActivity;
 import com.ivan.messenger.R;
-import com.ivan.messenger.utils.common.CommonUtils;
+import com.ivan.messenger.lib.utils.common.CommonUtils;
 
 /**
  * 注册用Activity，上报到runtime database。

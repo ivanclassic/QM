@@ -1,11 +1,11 @@
-package com.ivan.messenger.sp;
+package com.ivan.messenger.lib.sp;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.ivan.messenger.IMessengerApplication;
 import com.ivan.messenger.RuntimeCheck;
-import com.ivan.messenger.sp.provider.ConfigProvider;
+import com.ivan.messenger.lib.sp.provider.ConfigProvider;
 
 /**
  * Created by zhaoyifan on 17-7-12.

@@ -1,4 +1,4 @@
-package com.ivan.messenger.sp;
+package com.ivan.messenger.lib.sp;
 
 public interface IServiceConfig {
 

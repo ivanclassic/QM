@@ -11,7 +11,7 @@ import com.ivan.messenger.ui.MainActivity;
 import com.ivan.messenger.ui.SigninFragment;
 import com.ivan.messenger.ui.SignupFragment;
 import com.ivan.messenger.ui.WelcomeFragment;
-import com.ivan.messenger.utils.ILog;
+import com.ivan.messenger.lib.utils.ILog;
 
 public class EntryActivity extends BaseFragmentActivity
         implements AuthPresenter.IView {

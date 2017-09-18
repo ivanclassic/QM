@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.ivan.messenger.R;
-import com.ivan.messenger.utils.common.CommonUtils;
+import com.ivan.messenger.lib.utils.common.CommonUtils;
 
 /**
  * Created by zhaoyifan on 17-9-8.

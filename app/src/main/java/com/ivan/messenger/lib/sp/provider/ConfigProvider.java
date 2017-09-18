@@ -1,4 +1,4 @@
-package com.ivan.messenger.sp.provider;
+package com.ivan.messenger.lib.sp.provider;
 
 import android.content.ContentProvider;
 import android.content.ContentResolver;
@@ -10,13 +10,13 @@ import android.text.TextUtils;
 
 import com.ivan.messenger.IMessengerApplication;
 import com.ivan.messenger.RuntimeCheck;
-import com.ivan.messenger.sp.ServiceConfigManager;
-import com.ivan.messenger.utils.ILog;
+import com.ivan.messenger.lib.sp.ServiceConfigManager;
+import com.ivan.messenger.lib.utils.ILog;
 
 public class ConfigProvider extends ContentProvider {
     private static final String TAG = "ConfigProvider";
 
-    public static final String AUTHORITY = "com.ivan.messenger.sp.provider";
+    public static final String AUTHORITY = "com.ivan.messenger.lib.sp.provider";
     public static final Uri CONFIG_CONTENT_URI = Uri.parse("content://" + AUTHORITY);
 
     private static final int LENGTH_CONTENT_URI = CONFIG_CONTENT_URI.toString().length() + 1;
