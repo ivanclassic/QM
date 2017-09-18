@@ -1,8 +1,11 @@
-package com.ivan.messenger;
+package com.ivan.messenger.lib;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.os.Environment;
+
+import com.ivan.messenger.BuildConfig;
+import com.ivan.messenger.IMessengerApplication;
 
 import java.io.File;
 

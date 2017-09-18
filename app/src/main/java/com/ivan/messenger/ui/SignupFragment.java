@@ -11,10 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.ivan.messenger.EntryActivity;
 import com.ivan.messenger.R;
 import com.ivan.messenger.lib.utils.common.CommonUtils;
+import com.ivan.messenger.ui.widget.PasswordSwitcher;
 
 /**
  * 注册用Activity，上报到runtime database。
@@ -30,7 +32,9 @@ public class SignupFragment extends AuthBaseFragment implements View.OnClickList
     private EditText mNameEditor;
     private EditText mPasswordEditor;
     private EditText mConfirmEditor;
-    private Button mSignupBtn;
+    private View mSignupBtn;
+    private PasswordSwitcher mVisibilitySwitch1;
+    private PasswordSwitcher mVisibilitySwitch2;
 
     private TextWatcher mNameWatcher = new TextWatcher() {
         @Override
@@ -64,6 +68,10 @@ public class SignupFragment extends AuthBaseFragment implements View.OnClickList
         mSignupBtn = rootView.findViewById(R.id.btn_confirm);
         mSignupBtn.setOnClickListener(this);
         mNameEditor.addTextChangedListener(mNameWatcher);
+        mVisibilitySwitch1 = rootView.findViewById(R.id.switcher_pwd_visibility);
+        mVisibilitySwitch2 = rootView.findViewById(R.id.switcher_confirm_visibility);
+        mVisibilitySwitch1.setEditor(mPasswordEditor);
+        mVisibilitySwitch2.setEditor(mConfirmEditor);
         return rootView;
     }
 

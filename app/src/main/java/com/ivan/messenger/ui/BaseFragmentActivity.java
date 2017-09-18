@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 
-import com.ivan.messenger.Env;
+import com.ivan.messenger.lib.Env;
 import com.ivan.messenger.lib.utils.ILog;
 
 public abstract class BaseFragmentActivity extends FragmentActivity {

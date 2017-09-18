@@ -1,0 +1,8 @@
+<resources>
+    <declare-styleable name="PasswordSwitcher">
+        <attr name="switcher_on_img" format="reference" />
+        <attr name="switcher_off_img" format="reference" />
+        <attr name="switcher_visible" format="boolean" />
+        <attr name="switcher_switchable" format="boolean" />
+    </declare-styleable>
+</resources>

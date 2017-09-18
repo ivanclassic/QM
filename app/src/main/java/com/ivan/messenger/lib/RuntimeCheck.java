@@ -1,4 +1,4 @@
-package com.ivan.messenger;
+package com.ivan.messenger.lib;
 
 public class RuntimeCheck {
     public static final String IMES_SERVICE_PROCESSNAME = ":service";

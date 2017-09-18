@@ -2,7 +2,7 @@ package com.ivan.messenger.lib.utils;
 
 import android.util.Log;
 
-import com.ivan.messenger.Env;
+import com.ivan.messenger.lib.Env;
 
 /**
  * Created by zhaoyifan on 17-7-12.

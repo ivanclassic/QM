@@ -9,7 +9,7 @@ import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
 import com.ivan.messenger.IMessengerApplication;
-import com.ivan.messenger.RuntimeCheck;
+import com.ivan.messenger.lib.RuntimeCheck;
 import com.ivan.messenger.lib.sp.ServiceConfigManager;
 import com.ivan.messenger.lib.utils.ILog;
 

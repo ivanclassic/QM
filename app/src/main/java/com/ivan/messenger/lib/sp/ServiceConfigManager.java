@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.ivan.messenger.IMessengerApplication;
-import com.ivan.messenger.RuntimeCheck;
+import com.ivan.messenger.lib.RuntimeCheck;
 import com.ivan.messenger.lib.sp.provider.ConfigProvider;
 
 /**
