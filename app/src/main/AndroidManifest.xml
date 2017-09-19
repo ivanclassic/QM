@@ -22,6 +22,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity android:name=".EntryActivity"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -36,11 +37,15 @@
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
+
         <service android:name=".firebase.message.MessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
+        <service android:name=".lib.live.PermanentService"
+            android:process=":service" />
 
         <provider
             android:name=".lib.sp.provider.ConfigProvider"

@@ -5,13 +5,14 @@ import android.support.v4.app.Fragment;
 import android.widget.Toast;
 
 import com.ivan.messenger.presenter.AuthPresenter;
-import com.ivan.messenger.ui.AuthBaseFragment;
 import com.ivan.messenger.ui.BaseFragmentActivity;
 import com.ivan.messenger.ui.MainActivity;
 import com.ivan.messenger.ui.SigninFragment;
 import com.ivan.messenger.ui.SignupFragment;
 import com.ivan.messenger.ui.WelcomeFragment;
 import com.ivan.messenger.lib.utils.ILog;
+
+import static com.ivan.messenger.lib.KFinalValues.FRAGMENT_ARGUMENT_PRESENTER;
 
 public class EntryActivity extends BaseFragmentActivity
         implements AuthPresenter.IView {
@@ -28,7 +29,7 @@ public class EntryActivity extends BaseFragmentActivity
         setContentView(R.layout.activity_entry);
         mAuthPresenter = new AuthPresenter(this);
         Bundle bundle = new Bundle();
-        bundle.putSerializable(AuthBaseFragment.FRAGMENT_ARGUMENT_PRESENTER, mAuthPresenter);
+        bundle.putSerializable(FRAGMENT_ARGUMENT_PRESENTER, mAuthPresenter);
         initAuthFragment(bundle);
         mAuthPresenter.onCreate();
     }

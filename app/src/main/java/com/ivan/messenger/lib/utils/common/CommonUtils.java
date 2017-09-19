@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.telephony.TelephonyManager;
 
 import com.ivan.messenger.IMessengerApplication;
+import com.ivan.messenger.lib.live.PermanentService;
 import com.ivan.messenger.lib.sp.KUserConfigManager;
 import com.ivan.messenger.lib.utils.ILog;
 
@@ -56,5 +57,20 @@ public class CommonUtils {
 
     public static boolean isEmailValid(CharSequence email) {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
+
+    // 启动一个服务
+    public static void startPermanentService(Context context) {
+        if (null == context) {
+            return;
+        }
+        Intent serviceIntent = new Intent(context, PermanentService.class);
+        try {
+            if (null == context.startService(serviceIntent)) {
+                ILog.e("Servive", "start service fail");
+            }
+        } catch (Exception e) {
+            ILog.e("Servive", "startPermanentService", e);
+        }
     }
 }

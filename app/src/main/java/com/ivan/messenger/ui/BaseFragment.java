@@ -9,13 +9,13 @@ import android.view.ViewGroup;
 
 import com.ivan.messenger.presenter.AuthPresenter;
 
+import static com.ivan.messenger.lib.KFinalValues.FRAGMENT_ARGUMENT_PRESENTER;
+
 /**
  * Created by zhaoyifan on 17-9-8.
  */
 
 public abstract class BaseFragment extends Fragment {
-    public static final String FRAGMENT_ARGUMENT_PRESENTER = "fragment_argument_presenter";
-
     protected AuthPresenter mAuthPresenter;
 
     @Nullable

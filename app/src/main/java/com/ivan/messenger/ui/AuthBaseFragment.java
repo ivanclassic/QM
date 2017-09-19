@@ -7,7 +7,6 @@ import com.ivan.messenger.R;
  */
 
 public class AuthBaseFragment extends BaseFragment {
-    public static final String FRAGMENT_ARGUMENT_PRESENTER = "fragment_argument_presenter";
 
     @Override
     public int getEnterAnim() {

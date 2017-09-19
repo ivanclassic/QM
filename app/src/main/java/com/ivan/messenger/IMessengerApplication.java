@@ -5,6 +5,7 @@ import android.content.res.Configuration;
 
 import com.ivan.messenger.lib.RuntimeCheck;
 import com.ivan.messenger.lib.utils.ProcessUtil;
+import com.ivan.messenger.lib.utils.common.CommonUtils;
 
 import java.io.File;
 
@@ -31,6 +32,10 @@ public class IMessengerApplication extends Application {
         super.onCreate();
         mProcessName = ProcessUtil.getProcessName(this);
         RuntimeCheck.init(mProcessName);
+        if (RuntimeCheck.isUIProcess()) {
+            // 主程序起来就加载服务
+            CommonUtils.startPermanentService(this);
+        }
     }
 
     @Override

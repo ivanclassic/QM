@@ -10,6 +10,12 @@ import com.google.firebase.auth.FirebaseUser;
 import com.ivan.messenger.firebase.model.User;
 import com.ivan.messenger.lib.utils.ILog;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 /**
@@ -20,8 +26,8 @@ public class AuthPresenter extends BasePresenter implements Serializable {
     private static final String TAG = "AuthPresenter";
     private static boolean sProcessExist = false;
 
-    private FirebaseAuth mAuth;
-    private IView mView;
+    private transient FirebaseAuth mAuth;
+    private transient IView mView;
 
     public AuthPresenter(IView view) {
         mAuth = FirebaseAuth.getInstance();
