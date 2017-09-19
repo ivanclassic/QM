@@ -62,6 +62,16 @@ public class WelcomeFragment extends BaseFragment implements View.OnClickListene
         return rootView;
     }
 
+    @Override
+    public int getEnterAnim() {
+        return 0;
+    }
+
+    @Override
+    public int getExitAnim() {
+        return 0;
+    }
+
     private void startWelcomeAnimation() {
         // TODO： 默认三秒，需要云控，用于展示广告
         hideSignPanel();

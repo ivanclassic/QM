@@ -63,6 +63,7 @@ public class SignupFragment extends AuthBaseFragment implements View.OnClickList
         mToolbar.setLogo(R.drawable.ic_arrow_back_white_24dp);
         mToolbar.setOnClickListener(this);
         mNameEditor = rootView.findViewById(R.id.field_username);
+        mNameEditor.requestFocus();
         mPasswordEditor = rootView.findViewById(R.id.field_password);
         mConfirmEditor = rootView.findViewById(R.id.field_confirm_password);
         mSignupBtn = rootView.findViewById(R.id.btn_confirm);

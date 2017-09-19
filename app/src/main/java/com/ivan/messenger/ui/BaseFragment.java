@@ -13,7 +13,7 @@ import com.ivan.messenger.presenter.AuthPresenter;
  * Created by zhaoyifan on 17-9-8.
  */
 
-public class BaseFragment extends Fragment {
+public abstract class BaseFragment extends Fragment {
     public static final String FRAGMENT_ARGUMENT_PRESENTER = "fragment_argument_presenter";
 
     protected AuthPresenter mAuthPresenter;
@@ -24,4 +24,7 @@ public class BaseFragment extends Fragment {
         mAuthPresenter = (AuthPresenter) getArguments().getSerializable(FRAGMENT_ARGUMENT_PRESENTER);
         return super.onCreateView(inflater, container, savedInstanceState);
     }
+
+    public abstract int getEnterAnim();
+    public abstract int getExitAnim();
 }

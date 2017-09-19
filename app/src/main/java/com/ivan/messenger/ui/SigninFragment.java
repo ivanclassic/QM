@@ -15,6 +15,7 @@ import android.widget.EditText;
 import com.ivan.messenger.EntryActivity;
 import com.ivan.messenger.R;
 import com.ivan.messenger.lib.utils.common.CommonUtils;
+import com.ivan.messenger.ui.widget.PasswordSwitcher;
 
 /**
  * 注册用Activity，上报到runtime database。
@@ -29,7 +30,8 @@ public class SigninFragment extends AuthBaseFragment implements View.OnClickList
     private Toolbar mToolbar;
     private EditText mNameEditor;
     private EditText mPasswordEditor;
-    private Button mSigninBtn;
+    private PasswordSwitcher mPwdSwitcher;
+    private View mSigninBtn;
 
     private TextWatcher mNameWatcher = new TextWatcher() {
         @Override
@@ -54,14 +56,17 @@ public class SigninFragment extends AuthBaseFragment implements View.OnClickList
         super.onCreateView(inflater, container, savedInstanceState);
         View rootView = inflater.inflate(R.layout.fragment_signin, container, false);
         mToolbar = rootView.findViewById(R.id.toolbar);
-        mToolbar.setTitle(R.string.text_signup);
+        mToolbar.setTitle(R.string.text_signin);
         mToolbar.setLogo(R.drawable.ic_arrow_back_white_24dp);
         mToolbar.setOnClickListener(this);
         mNameEditor = rootView.findViewById(R.id.field_username);
+        mNameEditor.requestFocus();
         mPasswordEditor = rootView.findViewById(R.id.field_password);
         mSigninBtn = rootView.findViewById(R.id.btn_confirm);
         mSigninBtn.setOnClickListener(this);
         mNameEditor.addTextChangedListener(mNameWatcher);
+        mPwdSwitcher = rootView.findViewById(R.id.switcher_pwd_visibility);
+        mPwdSwitcher.setEditor(mPasswordEditor);
         return rootView;
     }
 
