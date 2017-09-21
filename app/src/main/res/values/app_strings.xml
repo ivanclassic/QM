@@ -5,4 +5,6 @@
     <string name="text_hint_confirm_pw">Confirm password</string>
     <string name="text_signup">Sign up</string>
     <string name="text_signin">Sign in</string>
+    <string name="notification_title_keep_alive">Quick Messenger is for your service</string>
+    <string name="notification_summary_keep_alive">Click for more information</string>
 </resources>

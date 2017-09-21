@@ -1,25 +1,30 @@
 package com.ivan.messenger.lib.live;
 
 import android.app.AlarmManager;
+import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.os.IBinder;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GoogleApiAvailability;
+import com.ivan.messenger.EntryActivity;
+import com.ivan.messenger.R;
 import com.ivan.messenger.lib.BackgroundThread;
 import com.ivan.messenger.lib.KFinalValues;
 import com.ivan.messenger.lib.utils.ILog;
+import com.ivan.messenger.ui.MainActivity;
+
+import static com.ivan.messenger.lib.KFinalValues.NOTIFICATION_KEEP_ALIVE;
 
 
 public class PermanentService extends Service {
     private static final String TAG = "PermanentService";
-    private static final long GCM_REG_CHECK_INTERVAL = 60 * 60 * 1000;     // 1小时
+    private static final long GCM_REG_CHECK_INTERVAL = 5000;
 
     private Thread mAsyncInitThread;
 
@@ -68,6 +73,7 @@ public class PermanentService extends Service {
     @Override
     public void onDestroy() {
         ILog.d(TAG, "onDestroy");
+        stopForeground(true);
         if (mScreenObserver != null) {
             unregisterReceiver(mScreenObserver);
         }
@@ -87,7 +93,19 @@ public class PermanentService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         ILog.d(TAG, "onStartCommand");
-        return START_STICKY;
+        Intent nfIntent = new Intent(this, EntryActivity.class);
+        Notification notification = new Notification.Builder(getApplicationContext())
+                .setContentIntent(PendingIntent.getActivity(this, 0, nfIntent, 0))
+                .setContentText(this.getText(R.string.notification_summary_keep_alive))
+                .setContentTitle(this.getText(R.string.notification_title_keep_alive))
+                .setSmallIcon(R.drawable.ic_swap_vertical_circle_black_24dp)
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_touch_app_black_24dp))
+                .setWhen(System.currentTimeMillis())
+                .setAutoCancel(false)
+                .setOngoing(true)
+                .build();
+        startForeground(NOTIFICATION_KEEP_ALIVE, notification);
+        return Service.START_STICKY;
     }
 
     private BinderContainer mBinderContainer = new BinderContainer();
@@ -102,17 +120,6 @@ public class PermanentService extends Service {
         if (null == context) {
             return;
         }
-        int resultCode = -1;
-        try {
-            resultCode = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(context);
-        } catch (Throwable e) {
-            e.printStackTrace();
-        }
-        ILog.d(TAG, "resultCode: " + resultCode);
-        if (resultCode != ConnectionResult.SUCCESS) {
-            return;
-        }
-        ILog.d(TAG, "alarm setting");
         try {
             AlarmManager alm;
             alm = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
@@ -122,7 +129,6 @@ public class PermanentService extends Service {
                 alm.cancel(pi);
                 alm.setRepeating(AlarmManager.RTC, System.currentTimeMillis() + GCM_REG_CHECK_INTERVAL,
                         GCM_REG_CHECK_INTERVAL, pi);
-                ILog.d(TAG, "alarm setted");
             }
         } catch (SecurityException ex) {
             ILog.e(TAG, "SecurityException", ex);

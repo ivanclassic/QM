@@ -66,6 +66,7 @@ public class CommonUtils {
         }
         Intent serviceIntent = new Intent(context, PermanentService.class);
         try {
+            ILog.d("Servive", "startPermanentService");
             if (null == context.startService(serviceIntent)) {
                 ILog.e("Servive", "start service fail");
             }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="status_disable">#693488eb</color>
-    <color name="status_pressed">#dd3488eb</color>
-    <color name="status_default">#ff3488eb</color>
+    <color name="status_disable">#69006DF0</color>
+    <color name="status_pressed">#dd006DF0</color>
+    <color name="status_default">#ff006DF0</color>
 </resources>

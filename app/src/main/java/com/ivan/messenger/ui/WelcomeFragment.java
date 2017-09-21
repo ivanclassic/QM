@@ -13,14 +13,14 @@ import com.ivan.messenger.R;
 
 import java.lang.ref.WeakReference;
 
+import static com.ivan.messenger.lib.KFinalValues.EXTRA_KEY_COUNTDOWN;
+
 /**
  * Created by zhaoyifan on 17-8-22.
  */
 
 public class WelcomeFragment extends BaseFragment implements View.OnClickListener {
     private static final String TAG = "SignupFragment";
-
-    public static final String EXTRA_KEY_COUNTDOWN = "extra_key_countdown";
 
     private View mSignPanel;
     private View mSignupBtn;

@@ -12,6 +12,7 @@ import com.ivan.messenger.ui.SignupFragment;
 import com.ivan.messenger.ui.WelcomeFragment;
 import com.ivan.messenger.lib.utils.ILog;
 
+import static com.ivan.messenger.lib.KFinalValues.EXTRA_KEY_COUNTDOWN;
 import static com.ivan.messenger.lib.KFinalValues.FRAGMENT_ARGUMENT_PRESENTER;
 
 public class EntryActivity extends BaseFragmentActivity
@@ -58,7 +59,7 @@ public class EntryActivity extends BaseFragmentActivity
     public void onWelcome(boolean countDown) {
         ILog.d(TAG, "欢迎欢迎，请看广告");
         Bundle bundle = mWelcomeFragment.getArguments();
-        bundle.putBoolean(WelcomeFragment.EXTRA_KEY_COUNTDOWN, countDown);
+        bundle.putBoolean(EXTRA_KEY_COUNTDOWN, countDown);
         mWelcomeFragment.setArguments(bundle);
         addFragment(mWelcomeFragment, false);
     }
