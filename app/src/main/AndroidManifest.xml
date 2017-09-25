@@ -58,6 +58,21 @@
             android:screenOrientation="portrait"
             android:launchMode="singleTask" />
 
+        <receiver android:name=".lib.receiver.BootCompleteReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".lib.receiver.UserPresentReceiver"
+            android:exported="true"
+            android:process=":service">
+            <intent-filter>
+                <action android:name="android.intent.action.USER_PRESENT" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
