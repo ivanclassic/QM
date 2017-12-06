@@ -3,6 +3,7 @@ package com.ivan.messenger.presenter;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -53,8 +54,22 @@ public class AuthPresenter extends BasePresenter implements Serializable {
                     ILog.d(TAG, "facebook login, get user info: " + user);
                     if (user != null) {
                         // TODO handle user login success
+                        String uid = null;
+                        String name = null;
+                        try {
+                            uid = user.getString("id");
+                            name = user.getString("name");
+                        } catch (Throwable e) {
+                            ILog.e(TAG, "get user info detail failed.", e);
+                        }
+                        if (!TextUtils.isEmpty(uid) && !TextUtils.isEmpty(name)) {
+                            onFacebookAuthSuccess(uid, name);
+                            mView.onAuth();
+                        } else {
+                            mView.onNotAuth();
+                        }
                     } else {
-                        // TODO handle user login failed
+                        mView.onNotAuth();
                     }
                 }
             });
@@ -152,19 +167,29 @@ public class AuthPresenter extends BasePresenter implements Serializable {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            onAuthSuccess(task.getResult().getUser());
+                            onFirebaseAuthSuccess(task.getResult().getUser());
                             mView.onAuth();
                         }
                     }
                 });
     }
 
-    private void onAuthSuccess(FirebaseUser user) {
+    private void onFirebaseAuthSuccess(FirebaseUser user) {
         String username = usernameFromEmail(user.getEmail());
         User me = new User();
         me.uid = user.getUid();
         me.nickName = username;
         me.userName = user.getEmail();
+        me.type = User.USER_TYPE_FIREBASE;
+        me.save();
+    }
+
+    private void onFacebookAuthSuccess(String uid, String name) {
+        User me = new User();
+        me.uid = uid;
+        me.nickName = name;
+        me.userName = name;
+        me.type = User.USER_TYPE_FACEBOOK;
         me.save();
     }
 

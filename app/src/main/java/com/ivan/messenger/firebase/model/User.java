@@ -10,15 +10,20 @@ import java.util.Map;
  */
 
 public class User implements IDataInterface {
+    public static final String USER_TYPE_FIREBASE = "firebase";
+    public static final String USER_TYPE_FACEBOOK = "facebook";
+
     public String uid;
     public String userName;
     public String nickName;
+    public String type;
 
     @Override
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
         result.put("userName", userName);
         result.put("nickName", nickName);
+        result.put("type", type);
         return result;
     }
 
