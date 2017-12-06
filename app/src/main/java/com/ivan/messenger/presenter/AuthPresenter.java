@@ -1,7 +1,19 @@
 package com.ivan.messenger.presenter;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
 
+import com.facebook.AccessToken;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.login.DefaultAudience;
+import com.facebook.login.LoginBehavior;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -10,13 +22,11 @@ import com.google.firebase.auth.FirebaseUser;
 import com.ivan.messenger.firebase.model.User;
 import com.ivan.messenger.lib.utils.ILog;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
+import org.json.JSONObject;
+
 import java.io.Serializable;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by zhaoyifan on 17-9-6.
@@ -26,17 +36,57 @@ public class AuthPresenter extends BasePresenter implements Serializable {
     private static final String TAG = "AuthPresenter";
     private static boolean sProcessExist = false;
 
+    private static final List<String> FB_PERMISSIONS = Arrays.asList("user_likes", "user_status");
+
     private transient FirebaseAuth mAuth;
     private transient IView mView;
+
+    private CallbackManager mCallbackManager;
+    private FacebookCallback<LoginResult> mFacebookCallback = new FacebookCallback<LoginResult>() {
+        @Override
+        public void onSuccess(LoginResult loginResult) {
+            ILog.d(TAG, "facebook login success.");
+            GraphRequest request = GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
+
+                @Override
+                public void onCompleted(final JSONObject user, GraphResponse graphResponse) {
+                    ILog.d(TAG, "facebook login, get user info: " + user);
+                    if (user != null) {
+                        // TODO handle user login success
+                    } else {
+                        // TODO handle user login failed
+                    }
+                }
+            });
+            request.executeAsync();
+        }
+
+        @Override
+        public void onCancel() {
+            ILog.d(TAG, "facebook login cancel.");
+            mView.onNotAuth();
+        }
+
+        @Override
+        public void onError(FacebookException error) {
+            ILog.e(TAG, "facebook login failed.", error);
+            mView.onNotAuth();
+        }
+    };
 
     public AuthPresenter(IView view) {
         mAuth = FirebaseAuth.getInstance();
         mView = view;
+        mCallbackManager = CallbackManager.Factory.create();
+        LoginManager.getInstance().setLoginBehavior(LoginBehavior.NATIVE_WITH_FALLBACK);
+        LoginManager.getInstance().setDefaultAudience(DefaultAudience.FRIENDS);
+        LoginManager.getInstance().registerCallback(mCallbackManager, mFacebookCallback);
     }
 
     public boolean isAuthed() {
-//        return true;
-        return mAuth.getCurrentUser() != null;
+        AccessToken accesstoken = AccessToken.getCurrentAccessToken();
+        return mAuth.getCurrentUser() != null ||
+                !(accesstoken == null || accesstoken.getPermissions().isEmpty());
     }
 
     public void onCreate() {
@@ -85,6 +135,14 @@ public class AuthPresenter extends BasePresenter implements Serializable {
 
     public void startSignin() {
         mView.onStartSignin();
+    }
+
+    public void startFacebookLogin(Fragment fragment) {
+        LoginManager.getInstance().logInWithReadPermissions(fragment, FB_PERMISSIONS);
+    }
+
+    public void onFacebookLoginResult(int requestCode, int resultCode, Intent data) {
+        mCallbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
     public void createUser(String userName, String password) {

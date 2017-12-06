@@ -20,6 +20,12 @@ android {
     }
 }
 
+repositories {
+    flatDir {
+        dirs 'libs' //this way we can find the .aar file in libs folder
+    }
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
@@ -35,5 +41,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:11.2.2'
     implementation 'com.google.firebase:firebase-messaging:11.2.2'
     implementation 'com.google.firebase:firebase-database:11.2.2'
+
+    compile 'com.facebook.android:facebook-login:[4,5)'
 }
 apply plugin: 'com.google.gms.google-services'

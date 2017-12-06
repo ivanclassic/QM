@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
-
     <FrameLayout
         android:id="@+id/frame_play_ground"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
     </FrameLayout>
-
     <LinearLayout
         android:id="@+id/sign_panel"
         android:layout_width="match_parent"
@@ -19,11 +19,12 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@drawable/divider_bg_gradient" />
+            android:background="@drawable/divider_bg_gradient"
+            android:layout_marginBottom="10dp"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="10dp">
+            android:layout_marginBottom="10dp">
             <TextView
                 android:id="@+id/btn_sign_up"
                 android:layout_width="0dp"
@@ -34,7 +35,6 @@
                 android:padding="10dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="5dp"
-                android:layout_marginBottom="10dp"
                 android:background="@drawable/btn_circle_bg_stoke_blue"
                 android:textColor="@color/status_default"/>
             <TextView
@@ -47,10 +47,25 @@
                 android:padding="10dp"
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="10dp"
-                android:layout_marginBottom="10dp"
                 android:background="@drawable/btn_circle_bg_solid_blue"
                 android:textColor="@android:color/white"/>
         </LinearLayout>
+        <TextView
+            android:id="@+id/btn_facebook_login"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="@string/com_facebook_loginview_log_in_button_long"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:drawableLeft="@drawable/com_facebook_button_login_logo"
+            android:background="@drawable/btn_signup_bg_solid_selector"/>
     </LinearLayout>
-
 </LinearLayout>

@@ -3,6 +3,8 @@ package com.ivan.messenger;
 import android.app.Application;
 import android.content.res.Configuration;
 
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
 import com.ivan.messenger.lib.RuntimeCheck;
 import com.ivan.messenger.lib.utils.ProcessUtil;
 import com.ivan.messenger.lib.utils.common.CommonUtils;
@@ -36,6 +38,8 @@ public class IMessengerApplication extends Application {
             // 主程序起来就加载服务
             CommonUtils.startPermanentService(this);
         }
+        FacebookSdk.sdkInitialize(getApplicationContext(), null);
+        AppEventsLogger.activateApp(this);
     }
 
     @Override

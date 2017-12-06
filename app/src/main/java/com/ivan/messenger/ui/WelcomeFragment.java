@@ -1,6 +1,7 @@
 package com.ivan.messenger.ui;
 
 import android.animation.ObjectAnimator;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -25,6 +26,7 @@ public class WelcomeFragment extends BaseFragment implements View.OnClickListene
     private View mSignPanel;
     private View mSignupBtn;
     private View mSigninBtn;
+    private View mFacebookLoginBtn;
     private Handler mHandler;
     private InnerRunnable mRunnable;
     private int mSeconds;
@@ -39,8 +41,10 @@ public class WelcomeFragment extends BaseFragment implements View.OnClickListene
         mSignPanel = rootView.findViewById(R.id.sign_panel);
         mSignupBtn = rootView.findViewById(R.id.btn_sign_up);
         mSigninBtn = rootView.findViewById(R.id.btn_sign_in);
+        mFacebookLoginBtn = rootView.findViewById(R.id.btn_facebook_login);
         mSignupBtn.setOnClickListener(this);
         mSigninBtn.setOnClickListener(this);
+        mFacebookLoginBtn.setOnClickListener(this);
         if (countDown) {
             mSignPanel.post(new Runnable() {
                 @Override
@@ -70,6 +74,12 @@ public class WelcomeFragment extends BaseFragment implements View.OnClickListene
     @Override
     public int getExitAnim() {
         return 0;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        mAuthPresenter.onFacebookLoginResult(requestCode, resultCode, data);
     }
 
     private void startWelcomeAnimation() {
@@ -111,6 +121,9 @@ public class WelcomeFragment extends BaseFragment implements View.OnClickListene
                 break;
             case R.id.btn_sign_up:
                 mAuthPresenter.startSignup();
+                break;
+            case R.id.btn_facebook_login:
+                mAuthPresenter.startFacebookLogin(this);
                 break;
         }
     }
